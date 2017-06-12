@@ -24,17 +24,15 @@ public class Hue {
     // colorLoop 1 hue
     public static void doColorLoop(String lamp){
         String body = "{ \"on\" : true, \"effect\" : \"colorloop\" }";
-        Rest.put(lamp, body, "application/json");
-        for (int i = 0; i < 30; i++) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println(30 - i);
+        Rest.put(lightsURL+lamp, body, "application/json");
+    }
+
+    // colorLoop all hue
+    public static void doColorLoop(ArrayList<String> allHue){
+        for (String light : allHue) {
+            String body = "{ \"on\" : true, \"effect\" : \"colorloop\" }";
+            Rest.put(lightsURL+light+"/state/", body, "application/json");
         }
-        body = "{ \"on\" : false }";
-        Rest.put(lamp, body, "application/json");
     }
 
     // turn on 1 hue
