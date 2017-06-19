@@ -24,7 +24,7 @@ public class Zway {
     public static void main(String[] args) {
 
         // search all power outlets
-       /* for (Device dev : allDevices.getAllDevices()) {
+        for (Device dev : allDevices.getAllDevices()) {
             if (dev.getDeviceType().equalsIgnoreCase("SwitchBinary")) {
                 logger.debug("Device " + dev.getNodeId() + " is a " + dev.getDeviceType());
                 // turn it on
@@ -39,7 +39,7 @@ public class Zway {
             // turn it off
             logger.info("Turn device " + dev.getNodeId() + " off...");
             dev.off();
-        }*/
+        }
     }
 
     // turn on 1 device
@@ -55,19 +55,18 @@ public class Zway {
     }
 
     //turn on a list of devices
-    public static void turnOn(List<DeviceMap> devices, Logger logger){
-        for (DeviceMap dev : devices) {
-            logger.info("Turn device " + dev.getDev().getNodeId() + " on...");
-            dev.getDev().on();
+    public static void turnOn(List<Device> devices, Logger logger){
+        for (Device dev : devices) {
+            logger.info("Turn device " + dev.getNodeId() + " on...");
+            dev.on();
         }
     }
 
     //turn off a list of devices
-    public static void turnOff(List<DeviceMap> devices, Logger logger){
-        for (DeviceMap dev : devices) {
-            logger.info("Turn device " + dev.getDev().getNodeId() + " off...");
-            dev.getDev().off();
+    public static void turnOff(List<Device> devices, Logger logger){
+        for (Device dev : devices) {
+            logger.info("Turn device " + dev.getNodeId() + " off...");
+            dev.off();
         }
     }
-
 }

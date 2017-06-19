@@ -69,271 +69,53 @@ public class TaskWebhook {
         String username = "admin";
         String password = "raz4reti2";
         IZWayApi zwayApi = new ZWayApiHttp(ipAddress, 8083, "http", username, password, 0, false, new ZWaySimpleCallback());
-
         //collezione di dati
+        ArrayList<Device> zwaveLights1 = new {"ZWayVDev_zway_7-0-37", "ZWayVDev_zway_18-0-37" /*, "ZWayVDev_zway_1-0-37", "ZWayVDev_zway_2-0-37", "ZWayVDev_zway_3-0-37", "ZWayVDev_zway_4-0-37"*/};
+        ArrayList<Device> zwaveDevices1 = new{"ZWayVDev_zway_9-0-37" /*, "ZWayVDev_zway_11-0-37"*/};
+        
+        
         ArrayList<DeviceMap> zwaveLights = new ArrayList<DeviceMap>();
-        DeviceMap lampCorridoio = new DeviceMap(zwayApi.getDevices().getDeviceById("ZWayVDev_zway_7-0-37"), "corridoio");
-        DeviceMap lampCamera = new DeviceMap(zwayApi.getDevices().getDeviceById("ZWayVDev_zway_18-0-37"), "camera");
-        zwaveLights.add(lampCorridoio);
-        zwaveLights.add(lampCamera);
+        DeviceMap dev1 = new DeviceMap("ZWayVDev_zway_7-0-37", "bagno");
+        DeviceMap dev2 = new DeviceMap("ZWayVDev_zway_18-0-37", "camera");
 
-        ArrayList<String> hueLights = new ArrayList<String>();
-        hueLights.add("1");
-        hueLights.add("2");
-        hueLights.add("3");
-
+        /*
+        DeviceMap dev3 = new DeviceMap("ZWayVDev_zway_1-0-37", "cucina");
+        DeviceMap dev4 = new DeviceMap("ZWayVDev_zway_2-0-37", "sala");
+        */
         ArrayList<DeviceMap> zwaveDevices = new ArrayList<DeviceMap>();
-        DeviceMap stereo = new DeviceMap(zwayApi.getDevices().getDeviceById("ZWayVDev_zway_9-0-37"), "stereo");
-        zwaveDevices.add(stereo);
+        DeviceMap dev5 = new DeviceMap("ZWayVDev_zway_9-0-37", "stereo");
+        /*
+        DeviceMap dev6 = new DeviceMap("ZWayVDev_zway_11-0-37", "stufetta");
+        */
 
-        /////////////////////////////PERCORSO CUCINA BAGNO
-        ArrayList<DeviceMap> cucinaBagno = new ArrayList<DeviceMap>();
-        cucinaBagno.add(lampCorridoio);
-        ArrayList<String> cucinaBagnoHue = new ArrayList<String>();
-        cucinaBagnoHue.add("1");//luce del bagno      
-        cucinaBagnoHue.add("2");//luce della cucina
-
-        if (input.getResult().getAction().equalsIgnoreCase("pathCucinaBagnoOn")) {
-            //turn on all hue lights on a path
-            Hue.turnAllOn(cucinaBagnoHue);
-            //turn on all zwave lights on a path
-            Zway.turnOn(cucinaBagno, logger);
-            text = "ok sarà fatto!!\n";
-        }
+        //lampade associate alle stanze
+        Device bagno = zwayApi.getDevices().getDeviceById("ZWayVDev_zway_18-0-37");
+        Device camera = zwayApi.getDevices().getDeviceById("ZWayVDev_zway_7-0-37");
+        List<Device> bagnoCamera = new ArrayList<Device>();
+        bagnoCamera.add(bagno);
+        bagnoCamera.add(camera);
 
 
-        if (input.getResult().getAction().equalsIgnoreCase("pathCucinaBagnoOff")) {
-            //turn off all hue lights on a path
-            Hue.turnAllOff(cucinaBagnoHue);
-            //turn off all zwave lights on a path
-            Zway.turnOff(cucinaBagno, logger);
-            text = "Spengo le luci!!\n";
-        }
+        if (input.getResult().getAction().equalsIgnoreCase("bagnoCameraOn")) {
+            // get all the Z-Wave devices
+            ArrayList<Device> percorso = new ArrayList<Device>();
 
-        /////////////////////////PERCORSO CUCINA CAMERA/////////////////////////////
-        ArrayList<DeviceMap> cucinaCamera = new ArrayList<DeviceMap>();
-        cucinaCamera.add(lampCorridoio);
-        cucinaCamera.add(lampCamera);
-        ArrayList<String> cucinaCameraHue = new ArrayList<String>();
-        cucinaCameraHue.add("2");
-
-        if (input.getResult().getAction().equalsIgnoreCase("pathCucinaCameraOn")) {
-            //turn on all hue lights on a path
-            Hue.turnAllOn(cucinaCameraHue);
-            //turn on all zwave lights on a path
-            Zway.turnOn(cucinaCamera, logger);
-            text = "ok sarà fatto!!\n";
-        }
-
-
-        if (input.getResult().getAction().equalsIgnoreCase("pathCucinaCameraOff")) {
-            //turn off all hue lights on a path
-            Hue.turnAllOff(cucinaCameraHue);
-            //turn off all zwave lights on a path
-            Zway.turnOff(cucinaCamera, logger);
-            text = "Spengo le luci!!\n";
-        }
-
-        /////////////////////////PERCORSO CUCINA SALA/////////////////////////////
-        ArrayList<DeviceMap> cucinaSala = new ArrayList<DeviceMap>();
-        cucinaSala.add(lampCorridoio);
-
-        ArrayList<String> cucinaSalaHue = new ArrayList<String>();
-        cucinaSalaHue.add("2");
-        cucinaSalaHue.add("3");
-
-        if (input.getResult().getAction().equalsIgnoreCase("pathCucinaSalaOn")) {
-            //turn on all hue lights on a path
-            Hue.turnAllOn(cucinaSalaHue);
-            //turn on all zwave lights on a path
-            Zway.turnOn(cucinaSala, logger);
-            text = "ok sarà fatto!!\n";
-        }
-
-
-        if (input.getResult().getAction().equalsIgnoreCase("pathCucinaSalaOff")) {
-            //turn off all hue lights on a path
-            Hue.turnAllOff(cucinaSalaHue);
-            //turn off all zwave lights on a path
-            Zway.turnOff(cucinaSala, logger);
-            text = "Spengo le luci!!\n";
-        }
-
-        /////////////////////////PERCORSO CUCINA CORRIDOIO/////////////////////////////
-        ArrayList<DeviceMap> cucinaCorridoio = new ArrayList<DeviceMap>();
-        cucinaSala.add(lampCorridoio);
-
-        ArrayList<String> cucinaCorridoioHue = new ArrayList<String>();
-        cucinaCorridoioHue.add("2");
-
-        if (input.getResult().getAction().equalsIgnoreCase("pathCucinaCorridoioOn")) {
-            //turn on all hue lights on a path
-            Hue.turnAllOn(cucinaCorridoioHue);
-            //turn on all zwave lights on a path
-            Zway.turnOn(cucinaCorridoio, logger);
-            text = "ok sarà fatto!!\n";
-        }
-
-
-        if (input.getResult().getAction().equalsIgnoreCase("pathCucinaCorridoioOff")) {
-            //turn off all hue lights on a path
-            Hue.turnAllOff(cucinaCorridoioHue);
-            //turn off all zwave lights on a path
-            Zway.turnOff(cucinaCorridoio, logger);
-            text = "Spengo le luci!!\n";
-        }
-
-        /////////////////////////PERCORSO BAGNO CAMERA/////////////////////////////
-        ArrayList<DeviceMap> bagnoCamera = new ArrayList<DeviceMap>();
-        bagnoCamera.add(lampCorridoio);
-        bagnoCamera.add(lampCamera);
-
-        ArrayList<String> bagnoCameraHue = new ArrayList<String>();
-        bagnoCameraHue.add("1");
-
-        if (input.getResult().getAction().equalsIgnoreCase("pathBagnoCameraOn")) {
-            //turn on all hue lights on a path
-            Hue.turnAllOn(bagnoCameraHue);
-            //turn on all zwave lights on a path
+            text = "Accendo le luci dalla camera al bagno\n";
             Zway.turnOn(bagnoCamera, logger);
-            text = "ok sarà fatto!!\n";
         }
 
-
-        if (input.getResult().getAction().equalsIgnoreCase("pathBagnoCameraOff")) {
-            //turn off all hue lights on a path
-            Hue.turnAllOff(bagnoCameraHue);
-            //turn off all zwave lights on a path
+        if (input.getResult().getAction().equalsIgnoreCase("bagnoCameraOff")) {
+            // get all the Z-Wave devices
+            text = "Spengo le luci dalla camera al bagno\n";
             Zway.turnOff(bagnoCamera, logger);
-            text = "Spengo le luci!!\n";
         }
-
-        /////////////////////////PERCORSO BAGNO SALA/////////////////////////////
-        ArrayList<DeviceMap> bagnoSala = new ArrayList<DeviceMap>();
-        bagnoSala.add(lampCorridoio);
-
-        ArrayList<String> bagnoSalaHue = new ArrayList<String>();
-        bagnoSalaHue.add("1");
-        bagnoSalaHue.add("3");
-
-        if (input.getResult().getAction().equalsIgnoreCase("pathBagnoSalaOn")) {
-            //turn on all hue lights on a path
-            Hue.turnAllOn(bagnoSalaHue);
-            //turn on all zwave lights on a path
-            Zway.turnOn(bagnoSala, logger);
-            text = "ok sarà fatto!!\n";
-        }
-
-
-        if (input.getResult().getAction().equalsIgnoreCase("pathBagnoSalaOff")) {
-            //turn off all hue lights on a path
-            Hue.turnAllOff(bagnoSalaHue);
-            //turn off all zwave lights on a path
-            Zway.turnOff(bagnoSala, logger);
-            text = "Spengo le luci!!\n";
-        }
-
-      /////////////////////////PERCORSO BAGNO CORRIDOIO/////////////////////////////
-        ArrayList<DeviceMap> bagnoCorridoio = new ArrayList<DeviceMap>();
-        bagnoCorridoio.add(lampCorridoio);
-
-        ArrayList<String> bagnoCorridoioHue = new ArrayList<String>();
-        bagnoCorridoioHue.add("1");
-
-        if (input.getResult().getAction().equalsIgnoreCase("pathBagnoCorridoioOn")) {
-            //turn on all hue lights on a path
-            Hue.turnAllOn(bagnoCorridoioHue);
-            //turn on all zwave lights on a path
-            Zway.turnOn(bagnoCorridoio, logger);
-            text = "ok sarà fatto!!\n";
-        }
-
-
-        if (input.getResult().getAction().equalsIgnoreCase("pathBagnoCorridoioOff")) {
-            //turn off all hue lights on a path
-            Hue.turnAllOff(bagnoCorridoioHue);
-            //turn off all zwave lights on a path
-            Zway.turnOff(bagnoCorridoio, logger);
-            text = "Spengo le luci!!\n";
-        }
-
-        /////////////////////////PERCORSO CAMERA SALA/////////////////////////////
-        ArrayList<DeviceMap> cameraSala = new ArrayList<DeviceMap>();
-        cameraSala.add(lampCorridoio);
-        cameraSala.add(lampCamera);
-
-        ArrayList<String> cameraSalaHue = new ArrayList<String>();
-        cameraSalaHue.add("3");
-
-        if (input.getResult().getAction().equalsIgnoreCase("pathCameraSalaOn")) {
-            //turn on all hue lights on a path
-            Hue.turnAllOn(cameraSalaHue);
-            //turn on all zwave lights on a path
-            Zway.turnOn(cameraSala, logger);
-            text = "ok sarà fatto!!\n";
-        }
-
-
-        if (input.getResult().getAction().equalsIgnoreCase("pathCameraSalaOff")) {
-            //turn off all hue lights on a path
-            Hue.turnAllOff(cameraSalaHue);
-            //turn off all zwave lights on a path
-            Zway.turnOff(cameraSala, logger);
-            text = "Spengo le luci!!\n";
-        }
-
-
-        /////////////////////////PERCORSO CAMERA CORRIDOIO/////////////////////////////
-        ArrayList<DeviceMap> cameraCorridoio = new ArrayList<DeviceMap>();
-        cameraCorridoio.add(lampCorridoio);
-        cameraCorridoio.add(lampCamera);
-
-        if (input.getResult().getAction().equalsIgnoreCase("pathCameraCorridoioOn")) {
-            //turn on all zwave lights on a path
-            Zway.turnOn(cameraCorridoio, logger);
-            text = "ok sarà fatto!!\n";
-        }
-
-
-        if (input.getResult().getAction().equalsIgnoreCase("pathCameraCorridoioOff")) {
-
-            //turn off all zwave lights on a path
-            Zway.turnOff(cameraCorridoio, logger);
-            text = "Spengo le luci!!\n";
-        }
-
-        /////////////////////////PERCORSO SALA CORRIDOIO/////////////////////////////
-        ArrayList<DeviceMap> salaCorridoio = new ArrayList<DeviceMap>();
-        cameraCorridoio.add(lampCorridoio);
-
-        ArrayList<String> salaCorridoioHue = new ArrayList<String>();
-        salaCorridoioHue.add("3");
-
-        if (input.getResult().getAction().equalsIgnoreCase("pathSalaCorridoioOn")) {
-            //turn on all hue lights on a path
-            Hue.turnAllOn(salaCorridoioHue);
-            //turn on all zwave lights on a path
-            Zway.turnOn(salaCorridoio, logger);
-            text = "ok sarà fatto!!\n";
-        }
-
-
-        if (input.getResult().getAction().equalsIgnoreCase("pathSalaCorridoioOff")) {
-            //turn off all hue lights on a path
-            Hue.turnAllOff(cucinaBagnoHue);
-            //turn off all zwave lights on a path
-            Zway.turnOff(cucinaBagno, logger);
-            text = "Spengo le luci!!\n";
-        }
-
-
 
         //allLightsOn
-        if (input.getResult().getAction().equalsIgnoreCase("allLightsOn")) {
+        if (input.getResult().getAction().equalsIgnoreCase("allLightsOff")) {
             //turn on all hue
             Hue.turnAllOn();
             //turn on all zwave lights
-            Zway.turnOn(zwaveLights, logger);
+            Zway.turnOn(zwaveLights1, logger);
             text = "Accendo le luci\n";
         }
         //allLightsOff
@@ -341,39 +123,8 @@ public class TaskWebhook {
             //turn off all hue
             Hue.turnAllOff();
             //turn off all zwave lights
-            Zway.turnOff(zwaveLights, logger);
+            Zway.turnOff(zwaveLights1, logger);
             text = "Spengo le luci\n";
-        }
-
-
-        //partyModeOn
-        if (input.getResult().getAction().equalsIgnoreCase("partyModeOn")) {
-            //turn on all hue do color loop
-            Hue.doColorLoop(hueLights);
-            Zway.turnOn((zwayApi.getDevices().getDeviceById("ZWayVDev_zway_9-0-37")), logger);
-            text = "Accendo la modalità party\n";
-        }
-        //partyModeOff
-        if (input.getResult().getAction().equalsIgnoreCase("partyModeOff")) {
-            //turn off all hue
-            Hue.turnAllOff();
-            Zway.turnOff((zwayApi.getDevices().getDeviceById("ZWayVDev_zway_9-0-37")), logger);
-            text = "Spengo le luci\n";
-        }
-
-
-        //musicOn
-        if (input.getResult().getAction().equalsIgnoreCase("musicOn")) {
-            //turn on all zwave lights on a path
-            Zway.turnOn((zwayApi.getDevices().getDeviceById("ZWayVDev_zway_9-0-37")), logger);
-            text = "Accendo lo stereo\n";
-        }
-
-        //musicOff
-        if (input.getResult().getAction().equalsIgnoreCase("musicOff")) {
-            //turn on all zwave lights on a path
-            Zway.turnOff((zwayApi.getDevices().getDeviceById("ZWayVDev_zway_9-0-37")), logger);
-            text = "Spengo lo stereo\n";
         }
 
         // prepare the output
