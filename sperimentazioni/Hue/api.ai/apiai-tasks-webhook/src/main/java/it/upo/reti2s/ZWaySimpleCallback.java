@@ -217,7 +217,7 @@ public class ZWaySimpleCallback implements IZWayApiCallbacks {
      * @param message the {@link String} to print
      */
     private void logMessage(String message) {
-        Logger logger = LoggerFactory.getLogger(ZWayExample.class);
+        Logger logger = LoggerFactory.getLogger(Zway.class);
         logger.debug(message);
     }
 
@@ -227,7 +227,7 @@ public class ZWaySimpleCallback implements IZWayApiCallbacks {
      * @param error the {@link String} to print
      */
     private void logError(String error) {
-        Logger logger = LoggerFactory.getLogger(ZWayExample.class);
+        Logger logger = LoggerFactory.getLogger(Zway.class);
         logger.error(error);
     }
 }

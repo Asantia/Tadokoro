@@ -83,9 +83,12 @@ public class TaskWebhook {
         hueLights.add("3");
         */
         ArrayList<HueMap> hueLights = new ArrayList<HueMap>();
-        hueLights.add("1", "bagno");
-        hueLights.add("2", "cucina");
-        hueLights.add("3", "sala");
+        HueMap hue1 = new HueMap("1", "bagno");
+        HueMap hue2 = new HueMap("2", "cucina");
+        HueMap hue3 = new HueMap("3", "sala");
+        hueLights.add(hue1);
+        hueLights.add(hue2);
+        hueLights.add(hue3);
 
         ArrayList<DeviceMap> zwaveDevices = new ArrayList<DeviceMap>();
         DeviceMap stereo = new DeviceMap(zwayApi.getDevices().getDeviceById("ZWayVDev_zway_9-0-37"), "stereo");
@@ -393,7 +396,7 @@ public class TaskWebhook {
             }
             for(DeviceMap dev : zwaveDevices){
                 if(dev.getDescr().equals("stereo")) {
-                    Zway.turnOn();
+                    Zway.turnOn(dev, logger);
                     text = "Accendo lo stereo\n";
                 }
             }
@@ -410,7 +413,7 @@ public class TaskWebhook {
             }
             for(DeviceMap dev : zwaveDevices){
                 if(dev.getDescr().equals("stereo")) {
-                    Zway.turnOff();
+                    Zway.turnOff(dev, logger);
                     text = "Spengo lo stereo\n";
                 }
             }
@@ -447,7 +450,7 @@ public class TaskWebhook {
             //Zway.turnOn((zwayApi.getDevices().getDeviceById("ZWayVDev_zway_9-0-37")), logger);
             for(DeviceMap dev : zwaveDevices){
                 if(dev.getDescr().equals("stereo")) {
-                    Zway.turnOn();
+                    Zway.turnOn(dev, logger);
                     text = "Accendo lo stereo\n";
                 }
             }
@@ -460,22 +463,13 @@ public class TaskWebhook {
             //Zway.turnOff((zwayApi.getDevices().getDeviceById("ZWayVDev_zway_9-0-37")), logger);
             for(DeviceMap dev : zwaveDevices){
                 if(dev.getDescr().equals("stereo")) {
-                    Zway.turnOff();
+                    Zway.turnOff(dev, logger);
                     text = "Spengo lo stereo\n";
                 }
             }
         }
 
         //tadokoroTasks
-        if (input.getResult().getAction().equalsIgnoreCase("tadokoroTasks")) {
-            String s = "";
-            for(String task : taskList){
-                s+= " "+task;
-            }
-            text = "Questi sono tutti i tasks di Tadokoro\n" + s;
-        }
-
-        //tadokoroTasks ---> CANCELLARE QUESTO
         if (input.getResult().getAction().equalsIgnoreCase("tadokoroTasks")) {
             String s = "";
             for(String task : taskList){

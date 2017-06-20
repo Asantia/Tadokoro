@@ -37,66 +37,64 @@ public class Hue {
 
     // partyLoop 1 hue
     public static void partyLoop(String lamp){
-        while(1) {
+
             String body = "{ \"on\" : true, \"bri\" : \"254\", \"hue\" : \"25004\" }";
             Rest.put(lightsURL + lamp + "/state/", body, "application/json");
-            sleep(500);
+
             body = "{ \"on\" : true, \"bri\" : \"254\", \"hue\" : \"55004\" }";
             Rest.put(lightsURL + lamp + "/state/", body, "application/json");
-            sleep(500);
+
             body = "{ \"on\" : true, \"bri\" : \"254\", \"hue\" : \"45004\" }";
             Rest.put(lightsURL + lamp + "/state/", body, "application/json");
-            sleep(500);
-        }
+
     }
 
     // partyLoop all hue
     public static void partyLoop(ArrayList<String> allHue){
-        while (1) {
             for (String light : allHue) {
                 String body = "{ \"on\" : true, \"bri\" : \"254\", \"hue\" : \"25004\" }";
                 Rest.put(lightsURL + light + "/state/", body, "application/json");
-                sleep(500);
+                //sleep(500);
                 body = "{ \"on\" : true, \"bri\" : \"254\", \"hue\" : \"55004\" }";
                 Rest.put(lightsURL + light + "/state/", body, "application/json");
-                sleep(500);
+                //sleep(500);
                 body = "{ \"on\" : true, \"bri\" : \"254\", \"hue\" : \"45004\" }";
                 Rest.put(lightsURL + light + "/state/", body, "application/json");
-                sleep(500);
+                //sleep(500);
             }
-        }
+
     }
 
     // cromoLoop 1 hue
     public static void cromoLoop(String lamp){
-        while(1) {
+
             String body = "{ \"on\" : true, \"bri\" : \"150\", \"hue\" : \"25004\" }";
             Rest.put(lightsURL + lamp + "/state/", body, "application/json");
-            sleep(5000);
+            //sleep(5000);
             body = "{ \"on\" : true, \"bri\" : \"150\", \"hue\" : \"55004\" }";
             Rest.put(lightsURL + lamp + "/state/", body, "application/json");
-            sleep(5000);
+            //sleep(5000);
             body = "{ \"on\" : true, \"bri\" : \"150\", \"hue\" : \"45004\" }";
             Rest.put(lightsURL + lamp + "/state/", body, "application/json");
-            sleep(5000);
-        }
+            //sleep(5000);
+
     }
 
     // cromoLoop all hue
     public static void cromoLoop(ArrayList<String> allHue){
-        while (1) {
+
             for (String light : allHue) {
                 String body = "{ \"on\" : true, \"bri\" : \"150\", \"hue\" : \"25004\" }";
                 Rest.put(lightsURL + light + "/state/", body, "application/json");
-                sleep(5000);
+                //sleep(5000);
                 body = "{ \"on\" : true, \"bri\" : \"150\", \"hue\" : \"55004\" }";
                 Rest.put(lightsURL + light + "/state/", body, "application/json");
-                sleep(5000);
+                //sleep(5000);
                 body = "{ \"on\" : true, \"bri\" : \"150\", \"hue\" : \"45004\" }";
                 Rest.put(lightsURL + light + "/state/", body, "application/json");
-                sleep(5000);
+                //sleep(5000);
             }
-        }
+
     }
 
     // turn on 1 hue
