@@ -37,64 +37,30 @@ public class Hue {
 
     // partyLoop 1 hue
     public static void partyLoop(String lamp){
-
-            String body = "{ \"on\" : true, \"bri\" : \"254\", \"hue\" : \"25004\" }";
-            Rest.put(lightsURL + lamp + "/state/", body, "application/json");
-
-            body = "{ \"on\" : true, \"bri\" : \"254\", \"hue\" : \"55004\" }";
-            Rest.put(lightsURL + lamp + "/state/", body, "application/json");
-
-            body = "{ \"on\" : true, \"bri\" : \"254\", \"hue\" : \"45004\" }";
-            Rest.put(lightsURL + lamp + "/state/", body, "application/json");
-
+        String body = "{ \"on\" : true, \"bri\" : 254, \"sat\" : 254, \"effect\" : \"colorloop\" }";
+        Rest.put(lightsURL + lamp + "/state/", body, "application/json");
     }
 
     // partyLoop all hue
     public static void partyLoop(ArrayList<String> allHue){
-            for (String light : allHue) {
-                String body = "{ \"on\" : true, \"bri\" : \"254\", \"hue\" : \"25004\" }";
-                Rest.put(lightsURL + light + "/state/", body, "application/json");
-                //sleep(500);
-                body = "{ \"on\" : true, \"bri\" : \"254\", \"hue\" : \"55004\" }";
-                Rest.put(lightsURL + light + "/state/", body, "application/json");
-                //sleep(500);
-                body = "{ \"on\" : true, \"bri\" : \"254\", \"hue\" : \"45004\" }";
-                Rest.put(lightsURL + light + "/state/", body, "application/json");
-                //sleep(500);
-            }
-
+        for (String light : allHue) {
+            String body = "{ \"on\" : true, \"bri\" : 254, \"sat\" : 254, \"effect\" : \"colorloop\" }";
+            Rest.put(lightsURL + light + "/state/", body, "application/json");
+        }
     }
 
     // cromoLoop 1 hue
     public static void cromoLoop(String lamp){
-
-            String body = "{ \"on\" : true, \"bri\" : \"150\", \"hue\" : \"25004\" }";
-            Rest.put(lightsURL + lamp + "/state/", body, "application/json");
-            //sleep(5000);
-            body = "{ \"on\" : true, \"bri\" : \"150\", \"hue\" : \"55004\" }";
-            Rest.put(lightsURL + lamp + "/state/", body, "application/json");
-            //sleep(5000);
-            body = "{ \"on\" : true, \"bri\" : \"150\", \"hue\" : \"45004\" }";
-            Rest.put(lightsURL + lamp + "/state/", body, "application/json");
-            //sleep(5000);
-
+        String body = "{ \"on\" : true, \"bri\" : 150, \"sat\" : 254, \"effect\" : \"colorloop\" }";
+        Rest.put(lightsURL + lamp + "/state/", body, "application/json");
     }
 
     // cromoLoop all hue
     public static void cromoLoop(ArrayList<String> allHue){
-
-            for (String light : allHue) {
-                String body = "{ \"on\" : true, \"bri\" : \"150\", \"hue\" : \"25004\" }";
-                Rest.put(lightsURL + light + "/state/", body, "application/json");
-                //sleep(5000);
-                body = "{ \"on\" : true, \"bri\" : \"150\", \"hue\" : \"55004\" }";
-                Rest.put(lightsURL + light + "/state/", body, "application/json");
-                //sleep(5000);
-                body = "{ \"on\" : true, \"bri\" : \"150\", \"hue\" : \"45004\" }";
-                Rest.put(lightsURL + light + "/state/", body, "application/json");
-                //sleep(5000);
-            }
-
+        for (String light : allHue) {
+            String body = "{ \"on\" : true, \"bri\" : 150, \"sat\" : 254, \"effect\" : \"colorloop\" }";
+            Rest.put(lightsURL + light + "/state/", body, "application/json");
+        }
     }
 
     // turn on 1 hue
@@ -115,7 +81,7 @@ public class Hue {
     public static void turnAllOn(){
         for (String light : allLights.keySet()) {
             String callURL = lightsURL + light + "/state";
-            String body = "{ \"on\" : true }";
+            String body = "{ \"on\" : true}";
             Rest.put(callURL, body, "application/json");
         }
     }
@@ -133,7 +99,7 @@ public class Hue {
     public static void turnAllOn(ArrayList<String> path){
         for (String light : path) {
             String callURL = lightsURL + light + "/state";
-            String body = "{ \"on\" : true }";
+            String body = "{ \"on\" : true}";
             Rest.put(callURL, body, "application/json");
         }
     }

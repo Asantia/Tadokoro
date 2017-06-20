@@ -389,16 +389,16 @@ public class TaskWebhook {
 
         //partyModeOn
         if (input.getResult().getAction().equalsIgnoreCase("partyModeOn")) {
-            //turn on all hue do color loop
-            for(HueMap hue : hueLights){
-                if(!(hue.getDescr().equals("bagno")))
-                    Hue.partyLoop(hue.getHue());
-            }
             for(DeviceMap dev : zwaveDevices){
                 if(dev.getDescr().equals("stereo")) {
                     Zway.turnOn(dev, logger);
                     text = "Accendo lo stereo\n";
                 }
+            }
+            //turn on all hue do color loop
+            for(HueMap hue : hueLights){
+                if(hue.getDescr().equals("sala"))
+                    Hue.partyLoop(hue.getHue());
             }
             //Hue.doColorLoop(hueLights);
             //Zway.turnOn((zwayApi.getDevices().getDeviceById("ZWayVDev_zway_9-0-37")), logger);
@@ -406,16 +406,16 @@ public class TaskWebhook {
         }
         //partyModeOff
         if (input.getResult().getAction().equalsIgnoreCase("partyModeOff")) {
-            //turn off all hue
-            for(HueMap hue : hueLights){
-                if(!(hue.getDescr().equals("bagno")))
-                    Hue.turnOff(hue.getHue());
-            }
             for(DeviceMap dev : zwaveDevices){
                 if(dev.getDescr().equals("stereo")) {
                     Zway.turnOff(dev, logger);
                     text = "Spengo lo stereo\n";
                 }
+            }
+            //turn off all hue
+            for(HueMap hue : hueLights){
+                if(hue.getDescr().equals("sala"))
+                    Hue.turnOff(hue.getHue());
             }
             //Hue.turnAllOff();
             //Zway.turnOff((zwayApi.getDevices().getDeviceById("ZWayVDev_zway_9-0-37")), logger);
