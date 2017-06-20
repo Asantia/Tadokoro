@@ -77,16 +77,54 @@ public class TaskWebhook {
         zwaveLights.add(lampCorridoio);
         zwaveLights.add(lampCamera);
 
-        ArrayList<String> hueLights = new ArrayList<String>();
+        /*ArrayList<String> hueLights = new ArrayList<String>();
         hueLights.add("1");
         hueLights.add("2");
         hueLights.add("3");
+        */
+        ArrayList<HueMap> hueLights = new ArrayList<HueMap>();
+        hueLights.add("1", "bagno");
+        hueLights.add("2", "cucina");
+        hueLights.add("3", "sala");
 
         ArrayList<DeviceMap> zwaveDevices = new ArrayList<DeviceMap>();
         DeviceMap stereo = new DeviceMap(zwayApi.getDevices().getDeviceById("ZWayVDev_zway_9-0-37"), "stereo");
         zwaveDevices.add(stereo);
 
-        /////////////////////////////PERCORSO CUCINA BAGNO
+        ArrayList<String> taskList = new ArrayList<String>();
+        taskList.add("pathCucinaBagnoOn");
+        taskList.add("pathCucinaCameraOn");
+        taskList.add("pathCucinaSalaOn");
+        taskList.add("pathCucinaCorridoioOn");
+        taskList.add("pathBagnoCameraOn");
+        taskList.add("pathBagnoSalaOn");
+        taskList.add("pathBagnoCorridoioOn");
+        taskList.add("pathCameraSalaOn");
+        taskList.add("pathCameraCorridoioOn");
+        taskList.add("pathSalaCorridoioOn");
+
+        taskList.add("pathCucinaBagnoOff");
+        taskList.add("pathCucinaCameraOff");
+        taskList.add("pathCucinaSalaOff");
+        taskList.add("pathCucinaCorridoioOff");
+        taskList.add("pathBagnoCameraOff");
+        taskList.add("pathBagnoSalaOff");
+        taskList.add("pathBagnoCorridoioOff");
+        taskList.add("pathCameraSalaOff");
+        taskList.add("pathCameraCorridoioOff");
+        taskList.add("pathSalaCorridoioOff");
+
+        taskList.add("allLightsOn");
+        taskList.add("partyModeOn");
+        taskList.add("cromoterapiaOn");
+        taskList.add("musicOn");
+
+        taskList.add("allLightsOff");
+        taskList.add("partyModeOff");
+        taskList.add("cromoterapiaOff");
+        taskList.add("musicOff");
+
+        /////////////////////////////PERCORSO CUCINA BAGNO/////////////////////////////
         ArrayList<DeviceMap> cucinaBagno = new ArrayList<DeviceMap>();
         cucinaBagno.add(lampCorridoio);
         ArrayList<String> cucinaBagnoHue = new ArrayList<String>();
@@ -349,31 +387,101 @@ public class TaskWebhook {
         //partyModeOn
         if (input.getResult().getAction().equalsIgnoreCase("partyModeOn")) {
             //turn on all hue do color loop
-            Hue.doColorLoop(hueLights);
-            Zway.turnOn((zwayApi.getDevices().getDeviceById("ZWayVDev_zway_9-0-37")), logger);
+            for(HueMap hue : hueLights){
+                if(!(hue.getDescr().equals("bagno")))
+                    Hue.partyLoop(hue.getHue());
+            }
+            for(DeviceMap dev : zwaveDevices){
+                if(dev.getDescr().equals("stereo")) {
+                    Zway.turnOn();
+                    text = "Accendo lo stereo\n";
+                }
+            }
+            //Hue.doColorLoop(hueLights);
+            //Zway.turnOn((zwayApi.getDevices().getDeviceById("ZWayVDev_zway_9-0-37")), logger);
             text = "Accendo la modalità party\n";
         }
         //partyModeOff
         if (input.getResult().getAction().equalsIgnoreCase("partyModeOff")) {
             //turn off all hue
-            Hue.turnAllOff();
-            Zway.turnOff((zwayApi.getDevices().getDeviceById("ZWayVDev_zway_9-0-37")), logger);
+            for(HueMap hue : hueLights){
+                if(!(hue.getDescr().equals("bagno")))
+                    Hue.turnOff(hue.getHue());
+            }
+            for(DeviceMap dev : zwaveDevices){
+                if(dev.getDescr().equals("stereo")) {
+                    Zway.turnOff();
+                    text = "Spengo lo stereo\n";
+                }
+            }
+            //Hue.turnAllOff();
+            //Zway.turnOff((zwayApi.getDevices().getDeviceById("ZWayVDev_zway_9-0-37")), logger);
             text = "Spengo le luci\n";
+        }
+
+        //cromoterapiaOn
+        if (input.getResult().getAction().equalsIgnoreCase("cromoterapiaOn")) {
+            //turn on all hue do color loop
+            for(HueMap hue : hueLights){
+                if(hue.getDescr().equals("bagno"))
+                    Hue.cromoLoop(hue.getHue());
+            }
+
+            text = "Accendo la modalità cromoterapia\n";
+        }
+        //cromoterapiaOff
+        if (input.getResult().getAction().equalsIgnoreCase("cromoterapiaOff")) {
+            //turn off all hue
+            for(HueMap hue : hueLights){
+                if(hue.getDescr().equals("bagno"))
+                    Hue.turnOff(hue.getHue());
+            }
+
+            text = "Spengo la modalita' cromoterapia\n";
         }
 
 
         //musicOn
         if (input.getResult().getAction().equalsIgnoreCase("musicOn")) {
             //turn on all zwave lights on a path
-            Zway.turnOn((zwayApi.getDevices().getDeviceById("ZWayVDev_zway_9-0-37")), logger);
-            text = "Accendo lo stereo\n";
+            //Zway.turnOn((zwayApi.getDevices().getDeviceById("ZWayVDev_zway_9-0-37")), logger);
+            for(DeviceMap dev : zwaveDevices){
+                if(dev.getDescr().equals("stereo")) {
+                    Zway.turnOn();
+                    text = "Accendo lo stereo\n";
+                }
+            }
         }
+
 
         //musicOff
         if (input.getResult().getAction().equalsIgnoreCase("musicOff")) {
             //turn on all zwave lights on a path
-            Zway.turnOff((zwayApi.getDevices().getDeviceById("ZWayVDev_zway_9-0-37")), logger);
-            text = "Spengo lo stereo\n";
+            //Zway.turnOff((zwayApi.getDevices().getDeviceById("ZWayVDev_zway_9-0-37")), logger);
+            for(DeviceMap dev : zwaveDevices){
+                if(dev.getDescr().equals("stereo")) {
+                    Zway.turnOff();
+                    text = "Spengo lo stereo\n";
+                }
+            }
+        }
+
+        //tadokoroTasks
+        if (input.getResult().getAction().equalsIgnoreCase("tadokoroTasks")) {
+            String s = "";
+            for(String task : taskList){
+                s+= " "+task;
+            }
+            text = "Questi sono tutti i tasks di Tadokoro\n" + s;
+        }
+
+        //tadokoroTasks ---> CANCELLARE QUESTO
+        if (input.getResult().getAction().equalsIgnoreCase("tadokoroTasks")) {
+            String s = "";
+            for(String task : taskList){
+                s+= " "+task;
+            }
+            text = "Questi sono tutti i tasks di Tadokoro\n" + s;
         }
 
         // prepare the output
@@ -382,6 +490,7 @@ public class TaskWebhook {
     }
 
 }
+
 //Roba utile
 /*
     // 1 light on z wave

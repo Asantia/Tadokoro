@@ -20,27 +20,25 @@ import de.fh_zwickau.informatik.sensor.model.zwaveapi.devices.ZWaveDevice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DeviceMap {
+public class HueMap {
 
-    private Device dev;
+    private String hue;
     private String descr;
 
-    public DeviceMap(Device dev, String descr){
-        this.dev = dev;
+    public HueMap(String hue, String descr){
+        this.hue = hue;
         this.descr = descr;
     }
 
-    public Device getDev() {
-        return dev;
+    public String getHue() {
+        return hue;
     }
 
     public String getDescr() {
         return descr;
     }
 
-    public void setDev(Device dev) {
-        this.dev = dev;
-    }
+    public void setHue(String hue) { this.hue = hue; }
 
     public void setDescr(String descr) { this.descr = descr; }
 }
