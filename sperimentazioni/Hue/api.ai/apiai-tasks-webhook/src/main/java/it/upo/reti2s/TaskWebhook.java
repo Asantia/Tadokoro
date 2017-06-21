@@ -21,15 +21,7 @@ import org.slf4j.LoggerFactory;
 
 import static spark.Spark.*;
 
-/**
- * api.ai Webhook example.
- * It gets all tasks, a specified task from a database and provides the information to
- * the api.ai service. It also allows users to create a new task, through the api.ai
- * conversational interface.
- *
- * @author <a href="mailto:luigi.derussis@uniupo.it">Luigi De Russis</a>
- * @version 1.0 (21/05/2017)
- */
+
 public class TaskWebhook {
 
     public static void main(String[] args) {
@@ -467,6 +459,11 @@ public class TaskWebhook {
                     text = "Spengo lo stereo\n";
                 }
             }
+        }
+
+        //meteo
+        if (input.getResult().getAction().equalsIgnoreCase("meteo")) {
+            text = Weather.ritornaMeteo();
         }
 
         //tadokoroTasks
