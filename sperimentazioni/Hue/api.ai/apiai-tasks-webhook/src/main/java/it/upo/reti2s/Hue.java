@@ -3,10 +3,6 @@ package it.upo.reti2s;
 import java.util.ArrayList;
 import java.util.Map;
 
-/**
- * Created by 20013051 on 29/05/2017.
- */
-
 
 public class Hue {
     // the URL of the Philips Hue bridge

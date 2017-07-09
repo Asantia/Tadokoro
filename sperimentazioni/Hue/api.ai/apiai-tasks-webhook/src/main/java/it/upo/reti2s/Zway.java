@@ -21,26 +21,7 @@ import java.util.List;
  */
 public class Zway {
 
-    public static void main(String[] args) {
-
-        // search all power outlets
-       /* for (Device dev : allDevices.getAllDevices()) {
-            if (dev.getDeviceType().equalsIgnoreCase("SwitchBinary")) {
-                logger.debug("Device " + dev.getNodeId() + " is a " + dev.getDeviceType());
-                // turn it on
-                logger.info("Turn device " + dev.getNodeId() + " on...");
-                dev.on();
-            }
-        }
-
-        // search again all power outlets
-        for (Device dev : allDevices.getAllDevices()) {
-            logger.debug("Device " + dev.getNodeId() + " is a " + dev.getDeviceType());
-            // turn it off
-            logger.info("Turn device " + dev.getNodeId() + " off...");
-            dev.off();
-        }*/
-    }
+    public static void main(String[] args) {}
 
     // turn on 1 device
     public static void turnOn(DeviceMap dev, Logger logger){

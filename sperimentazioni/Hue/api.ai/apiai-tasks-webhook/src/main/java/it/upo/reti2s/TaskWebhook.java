@@ -482,34 +482,3 @@ public class TaskWebhook {
 
 }
 
-//Roba utile
-/*
-    // 1 light on z wave
-        if (input.getResult().getAction().equalsIgnoreCase("allLightsOn")) {
-            // get all the Z-Wave devices
-            Device presa = zwayApi.getDevices().getDeviceById("ZWayVDev_zway_18-0-37"); //ZWayVDev_zway_7-0-37 oppure 9 per la lampadina
-            text = "Accendo le luci\n";
-            ZWayExample.turnOn(presa, logger);
-        }
-
-    // 1 light off hue
-        if (input.getResult().getAction().equalsIgnoreCase("allLightsOff")) {
-            String lightsURL = "http://172.30.1.138" + "/api/" + "DeQdozx1Dv0GpOPfmN02HKdvmOcmXIe7e9aiCEAu" + "/lights/" + 2 + "/state";
-            text = "Here we go:\n";
-            Hue.turnOff(lightsURL);
-        }
-
-    // 1 light off z wave
-        if (input.getResult().getAction().equalsIgnoreCase("allLightsOff")) {
-            // get all the Z-Wave devices
-            Device presa = zwayApi.getDevices().getDeviceById("ZWayVDev_zway_18-0-37"); //ZWayVDev_zway_7-0-37
-            text = "Spengo le luci\n";
-            ZWayExample.turnOff(presa, logger);
-        }
-    // 1 light colorLoop on hue
-        if (input.getResult().getAction().equalsIgnoreCase("doColorLoop")) {
-            String lightsURL = "http://172.30.1.138" + "/api/" + "DeQdozx1Dv0GpOPfmN02HKdvmOcmXIe7e9aiCEAu" + "/lights/"+ 2 + "/state";
-            text = "Here we go:\n";
-            Hue.doColorLoop(lightsURL);
-        }
-*/

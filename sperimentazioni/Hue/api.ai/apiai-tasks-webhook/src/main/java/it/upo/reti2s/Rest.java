@@ -14,10 +14,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
-
-/**
- * Created by 20013051 on 29/05/2017.
- */
 public class Rest {
     private static final Gson gson = new Gson();
 

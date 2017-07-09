@@ -20,15 +20,6 @@ import de.fh_zwickau.informatik.sensor.model.zwaveapi.devices.ZWaveDevice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
-/**
- * Mandatory callback class for the Z-Way Library in use.
- * Really trivial implementation: log all the responses at debug level.
- *
- * @author <a href="mailto:luigi.derussis@uniupo.it">Luigi De Russis</a>
- * @version 1.0 (24/05/2017)
- * @see <a href="https://github.com/pathec/ZWay-library-for-Java">Z-Way Library on GitHub</a> for documentation about the used library
- */
 public class ZWaySimpleCallback implements IZWayApiCallbacks {
 
     @Override
