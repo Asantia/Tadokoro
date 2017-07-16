@@ -64,8 +64,8 @@ public class TaskWebhook {
 
         //collezione di dati
         ArrayList<DeviceMap> zwaveLights = new ArrayList<DeviceMap>();
-        DeviceMap lampCorridoio = new DeviceMap(zwayApi.getDevices().getDeviceById("ZWayVDev_zway_7-0-37"), "corridoio");
-        DeviceMap lampCamera = new DeviceMap(zwayApi.getDevices().getDeviceById("ZWayVDev_zway_18-0-37"), "camera");
+        DeviceMap lampCorridoio = new DeviceMap(zwayApi.getDevices().getDeviceById("ZWayVDev_zway_22-0-37"), "corridoio");
+        DeviceMap lampCamera = new DeviceMap(zwayApi.getDevices().getDeviceById("ZWayVDev_zway_21-0-37"), "camera");
         zwaveLights.add(lampCorridoio);
         zwaveLights.add(lampCamera);
 
@@ -118,6 +118,90 @@ public class TaskWebhook {
         taskList.add("partyModeOff");
         taskList.add("cromoterapiaOff");
         taskList.add("musicOff");
+
+        taskList.add("salaOff");
+        taskList.add("salaOn");
+        taskList.add("bagnoOff");
+        taskList.add("bagnoOn");
+        taskList.add("cucinaOff");
+        taskList.add("cucinaOn");
+        taskList.add("cameraOff");
+        taskList.add("cameraOn");
+        taskList.add("corridoioOff");
+        taskList.add("corridoioOn");
+
+        //////////Corridoio//////////
+        if (input.getResult().getAction().equalsIgnoreCase("corridoioOn")) {
+                    Zway.turnOn(lampCorridoio, logger);
+                    text = "Accendo la luce\n";
+        }
+
+        if (input.getResult().getAction().equalsIgnoreCase("corridoioOff")) {
+                    Zway.turnOff(lampCorridoio, logger);
+                    text = "Spengo la luce\n";
+        }
+
+        //////////Camera//////////
+        if (input.getResult().getAction().equalsIgnoreCase("cameraOn")) {
+                    Zway.turnOn(lampCamera, logger);
+                    text = "Accendo la luce\n";
+        }
+
+        if (input.getResult().getAction().equalsIgnoreCase("cameraOff")) {
+                    Zway.turnOff(lampCamera, logger);
+                    text = "Spengo la luce\n";
+        }
+
+        //////////Sala//////////
+        if (input.getResult().getAction().equalsIgnoreCase("salaOn")) {
+            for(HueMap hue : hueLights){
+                if(hue.getDescr().equals("sala"))
+                    Hue.turnOn(hue.getHue());
+            }
+            text = "Accendo la luce\n";
+        }
+
+        if (input.getResult().getAction().equalsIgnoreCase("salaOff")) {
+            for(HueMap hue : hueLights){
+                if(hue.getDescr().equals("sala"))
+                    Hue.turnOff(hue.getHue());
+            }
+            text = "Spengo la luce\n";
+        }
+
+        //////////Cucina//////////
+        if (input.getResult().getAction().equalsIgnoreCase("cucinaOn")) {
+            for(HueMap hue : hueLights){
+                if(hue.getDescr().equals("cucina"))
+                    Hue.turnOn(hue.getHue());
+            }
+            text = "Accendo la luce\n";
+        }
+
+        if (input.getResult().getAction().equalsIgnoreCase("cucinaOff")) {
+            for(HueMap hue : hueLights){
+                if(hue.getDescr().equals("cucina"))
+                    Hue.turnOff(hue.getHue());
+            }
+            text = "Spengo la luce\n";
+        }
+
+        //////////Bagno//////////
+        if (input.getResult().getAction().equalsIgnoreCase("bagnoOn")) {
+            for(HueMap hue : hueLights){
+                if(hue.getDescr().equals("bagno"))
+                    Hue.turnOn(hue.getHue());
+            }
+            text = "Accendo la luce\n";
+        }
+
+        if (input.getResult().getAction().equalsIgnoreCase("bagnoOff")) {
+            for(HueMap hue : hueLights){
+                if(hue.getDescr().equals("bagno"))
+                    Hue.turnOff(hue.getHue());
+            }
+            text = "Spengo la luce\n";
+        }
 
         /////////////////////////////PERCORSO CUCINA BAGNO/////////////////////////////
         ArrayList<DeviceMap> cucinaBagno = new ArrayList<DeviceMap>();
